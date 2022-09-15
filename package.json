@@ -1,0 +1,38 @@
+{
+  "name": "fire1rtkquery",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.jsx",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/indigomx9/fire1rtkquery.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/indigomx9/fire1rtkquery/issues"
+  },
+  "homepage": "https://github.com/indigomx9/fire1rtkquery#readme",
+  "dependencies": {
+    "@reduxjs/toolkit": "^1.8.5",
+    "firebase": "^9.10.0",
+    "mdb-react-ui-kit": "^4.2.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-redux": "^8.0.2",
+    "react-router-dom": "^6.4.0",
+    "react-toastify": "^9.0.8"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^2.1.0",
+    "vite": "^3.1.1"
+  }
+}
+
+
