@@ -10,3 +10,16 @@ body {
     margin-top: 120px;
 }
 
+.homeMain {
+    margin: auto;
+    padding: 15px;
+    max-width: 1200px;
+    align-content: center;
+}
+
+.homeSec {
+    margin-left: 5px;
+    float: right;
+}
+
+

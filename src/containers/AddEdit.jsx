@@ -1,16 +1,16 @@
 import React from "react";
 import { toast } from "react-toastify";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { storage } from "../misc/firebase";
 import { BlogAPI } from "../global/BlogAPI";
-import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { ref, uploadBytesResumable, 
+    getDownloadURL } from "firebase/storage";
 import { MDBBtn, MDBCard, MDBCardBody, 
     MDBInput, MDBTextArea, MDBValidation, 
     MDBValidationItem } from "mdb-react-ui-kit";
 
 export const AddEdit = () => {
     const navigate = useNavigate();
-    const { id } = useParams();
     const [data, setData] = React.useState({
         title: "", description: ""
     });
@@ -24,11 +24,8 @@ export const AddEdit = () => {
         const uploadFile = () => {
             const storageRef = ref(storage, file.name);
             const uploadTask = uploadBytesResumable(storageRef, file);
-            uploadTask.on(
-                "state_changed", 
-                (snapshot) => {
-                    const progress =
-                        (snapshot.bytesTransferred / 
+            uploadTask.on("state_changed", (snapshot) => {
+                    const progress = (snapshot.bytesTransferred / 
                         snapshot.totalBytes) * 100;
                     console.log("Upload is " + progress + "% done");
                     setProgress(progress);
@@ -49,7 +46,9 @@ export const AddEdit = () => {
                     getDownloadURL(uploadTask.snapshot.ref)
                     .then((downloadURL) => {
                         toast.info("Image Upload Success!");
-                        setData((prev) => ({...prev, imgURL: downloadURL}));
+                        setData((prev) => ({
+                            ...prev, imgURL: downloadURL
+                        }));
                     })
                 });
         };

@@ -1,0 +1,19 @@
+import React from "react";
+import { MDBSpinner } from "mdb-react-ui-kit";
+
+export const Spinner = () => {
+    return (
+        <React.Fragment>
+            <MDBSpinner 
+                className="me-2 mt-5"
+                style={{ width: "3rem", height: "3rem" }}
+                ><span 
+                    className="visually-hidden"
+                    >Loading...
+                </span>
+            </MDBSpinner>
+        </React.Fragment>
+    );
+};
+
+
