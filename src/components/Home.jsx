@@ -5,10 +5,11 @@ import { Spinner } from "./Spinner";
 import { BlogAPI } from "../global/BlogAPI";
 import { MDBCard, MDBCardBody, MDBCardImage, 
     MDBCardTitle, MDBCol, MDBRow, 
-    MDBCardText, MDBBtn, MDBIcon } from "mdb-react-ui-kit";
+    MDBCardText } from "mdb-react-ui-kit";
 
 export const Home = () => {
-    const { error, isError, isLoading, data } = BlogAPI.useFetchAllQuery();
+    const { error, isError, isLoading, data } = 
+        BlogAPI.useFetchAllQuery();
     const [ deleteBlog ] = BlogAPI.useDeleteMutation();
 
     React.useEffect(() => {
@@ -50,9 +51,14 @@ export const Home = () => {
                                 </MDBCardTitle>
                                 <MDBCardText className="text-start">
                                     {excerpt(item.description, 80)}
-                                    <Link to={`/detail/${item.id}`}>Read More</Link>
+                                    <section>
+                                        <Link 
+                                            to={`/detail/${item.id}`}
+                                            >Read More
+                                        </Link>
+                                    </section>
                                 </MDBCardText>
-                                <section style={{ marginLeft: "5px", float: "right" }}>
+                                <section className="homeSec">
                                     <button 
                                         className="deleteBtn" 
                                         onClick={() => handleDelete(item.id)}

@@ -6,7 +6,9 @@ export const RootReducer = configureStore({
     reducer: {
         [BlogAPI.reducerPath]: BlogAPI.reducer
     },
-    middleware: (gDM) => gDM().concat(BlogAPI.middleware)
+    middleware: (gDM) => gDM({
+        serializableCheck: false,
+    }).concat(BlogAPI.middleware)
 });
 
 setupListeners(RootReducer.dispatch);
