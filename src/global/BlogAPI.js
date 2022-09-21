@@ -60,10 +60,10 @@ export const BlogAPI = createApi({
             invalidatesTags: ["Blog"],
         }),
         update: builder.mutation({
-            async queryFn({ id, data }) {
+            async queryFn({ id, blog }) {
                 try {
                     await updateDoc(doc(db, "blogs", id), {
-                        ...data,
+                        ...blog,
                         timestamp: serverTimestamp(),
                     });
                     return {

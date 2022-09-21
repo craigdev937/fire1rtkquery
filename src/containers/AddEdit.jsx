@@ -1,7 +1,8 @@
 import React from "react";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { storage } from "../misc/firebase";
+import { skipToken } from "@reduxjs/toolkit/dist/query";
 import { BlogAPI } from "../global/BlogAPI";
 import { ref, uploadBytesResumable, 
     getDownloadURL } from "firebase/storage";
@@ -11,14 +12,23 @@ import { MDBBtn, MDBCard, MDBCardBody,
 
 export const AddEdit = () => {
     const navigate = useNavigate();
+    const { id } = useParams();
     const [data, setData] = React.useState({
         title: "", description: ""
     });
     const [file, setFile] = React.useState(null);
     const [progress, setProgress] = React.useState(null);
     const [addBlog] = BlogAPI.useCreateMutation();
-
+    
+    const { data: blog } = BlogAPI.useGetOneQuery(id ? id : skipToken);
+    const [updateBlog] = BlogAPI.useUpdateMutation();
     const { title, description } = data;
+
+    React.useEffect(() => {
+        if (id && blog) {
+            setData({...blog});
+        }
+    }, [id, blog]);
 
     React.useEffect(() => {
         const uploadFile = () => {
@@ -63,15 +73,22 @@ export const AddEdit = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         if (title && description) {
-            await addBlog(data);
-            navigate("/");
+            if (!id) {
+                await addBlog(data);
+                toast.success("The Blog was added!");
+                navigate("/");
+            } else {
+                await updateBlog(id, blog);
+                toast.update("The Blog was updated!");
+                navigate("/");
+            }
         }
     };
 
     return (
         <main className="addEdit">
             <MDBCard alignment="center">
-                <h4 className="fw-bold">Create Blog</h4>
+                <h4 className="fw-bold">{id ? "Update Blog" : "Create Blog"}</h4>
                 <MDBCardBody>
                     <MDBValidation 
                         className="row g-3" 
@@ -115,8 +132,8 @@ export const AddEdit = () => {
                         <section className="col-12">
                             <MDBBtn 
                                 disabled={progress !== null && progress < 100}
-                                style={{width: "100%" }}>
-                                Submit
+                                style={{width: "100%" }}
+                                >{id ? "Update" : "Submit"}
                             </MDBBtn>
                         </section>
                     </MDBValidation>

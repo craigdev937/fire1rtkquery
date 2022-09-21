@@ -3,7 +3,8 @@ import { toast } from "react-toastify";
 import { useParams } from "react-router-dom";
 import { skipToken } from "@reduxjs/toolkit/dist/query";
 import { BlogAPI } from "../global/BlogAPI";
-import { MDBCard, MDBCardBody, MDBCardImage, MDBCardText, MDBCardTitle, MDBTypography
+import { MDBCard, MDBCardBody, MDBCardImage, 
+    MDBCardText, MDBCardTitle, MDBTypography
  } from "mdb-react-ui-kit";
 
 export const Detail = () => {
@@ -19,10 +20,9 @@ export const Detail = () => {
         <React.Fragment>
         <MDBCard className="mb-3">
             <MDBCardImage 
-                position="top" 
+                position="top" style={{ height: "600px" }}
                 src={blog?.imgURL} 
-                alt={blog?.title} 
-                style={{ height: "600px" }}
+                alt={blog?.title}                 
             />
             <MDBCardBody>
                 <MDBCardTitle className="h3 fw-bold">{blog?.title}</MDBCardTitle>
